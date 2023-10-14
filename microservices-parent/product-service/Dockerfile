@@ -38,5 +38,9 @@ ENV MONGO_DB_USERNAME=rootadmin \
 # Setting the port that product service is exposed to
 EXPOSE 8084
 
+## THE LIFE SAVER
+ADD https://github.com/ufoscout/docker-compose-wait/releases/download/2.2.1/wait /wait
+RUN chmod +x /wait
+
 # Finally executing the jar file from the cli
 ENTRYPOINT ["java", "-jar", "/app/product-service.jar"]
