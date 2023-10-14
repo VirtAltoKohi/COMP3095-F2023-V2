@@ -39,4 +39,4 @@ ENV MONGO_DB_USERNAME=rootadmin \
 EXPOSE 8084
 
 # Finally executing the jar file from the cli
-ENTRYPOINT ["Java", "-jar", "/app/product-service.jar"]
+ENTRYPOINT ["java", "-jar", "/app/product-service.jar"]

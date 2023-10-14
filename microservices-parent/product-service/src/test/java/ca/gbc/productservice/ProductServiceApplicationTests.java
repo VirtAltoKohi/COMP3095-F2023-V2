@@ -4,7 +4,6 @@ import ca.gbc.productservice.dto.ProductRequest;
 import ca.gbc.productservice.dto.ProductResponse;
 import ca.gbc.productservice.model.Product;
 import ca.gbc.productservice.repository.ProductRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -82,7 +81,7 @@ class ProductServiceApplicationTests extends AbstractContainerBaseTest {
 
     private List<ProductResponse> convertStringToObject(String jsonString) throws Exception {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(jsonString, new TypeReference<List<ProductResponse>>() {
+        return mapper.readValue(jsonString, new TypeReference<>() {
         });
     }
 
@@ -165,7 +164,7 @@ class ProductServiceApplicationTests extends AbstractContainerBaseTest {
 
         //WHEN
         ResultActions response = mockMvc.perform(MockMvcRequestBuilders
-                .put("/api/product/" + savedProduct.getId().toString())
+                .put("/api/product/" + savedProduct.getId())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productRequestString));
 
@@ -177,6 +176,7 @@ class ProductServiceApplicationTests extends AbstractContainerBaseTest {
         query.addCriteria(Criteria.where("id").is(savedProduct.getId()));
         Product storedProduct = mongoTemplate.findOne(query, Product.class);
 
+        assert storedProduct != null;
         assertEquals(savedProduct.getPrice(), storedProduct.getPrice());
 
     }
@@ -188,7 +188,7 @@ class ProductServiceApplicationTests extends AbstractContainerBaseTest {
         Product savedProduct = Product.builder()
                 .id(UUID.randomUUID().toString())
                 .name("Java Microservices Programming")
-                .description("Course Textbook - Java Microserviec Programming")
+                .description("Course Textbook - Java Microservice Programming")
                 .price(BigDecimal.valueOf(200))
                 .build();
 
@@ -196,7 +196,7 @@ class ProductServiceApplicationTests extends AbstractContainerBaseTest {
 
         //WHEN
         ResultActions response = mockMvc.perform(MockMvcRequestBuilders
-                .delete("/api/product/" + savedProduct.getId().toString())
+                .delete("/api/product/" + savedProduct.getId())
                 .contentType(MediaType.APPLICATION_JSON));
 
         //THEN
