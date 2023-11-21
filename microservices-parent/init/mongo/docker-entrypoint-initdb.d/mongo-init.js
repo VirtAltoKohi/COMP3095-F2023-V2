@@ -13,7 +13,7 @@ db.createUser(
 db.createCollection("user");
 
 print("END");
-print("Start");
+print("START");
 
 db = db.getSibling("product-service");
 
