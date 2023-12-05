@@ -20,7 +20,6 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway:4.0.8")
     implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.0.3")
-    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server:4.0.3")
 }
 
 tasks.withType<Test> {
